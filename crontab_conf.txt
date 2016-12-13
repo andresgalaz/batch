@@ -1,0 +1,8 @@
+# Cada minuto
+* * * * * /home/ubuntu/batch/calculaScore.sh PROD >> /home/ubuntu/batch/batch_crontab.log
+# Todos los dias a las 00:00
+0 0 * * * /home/ubuntu/batch/scoreInicioDiario.sh PROD >> /home/ubuntu/batch/daily_crontab.log
+# Al inicio de cada mez
+0 0 1 * * /home/ubuntu/batch/scoreInicioMensual.sh PROD >> /home/ubuntu/batch/month_crontab.log
+0,20,40 * * * * /home/ubuntu/batch/aliveMysql.sh >> /home/ubuntu/batch/batch_aliveMysql.log
+17 10,13,18,23 * * * /home/ubuntu/respaldo/mysqlDump/respaldo_continuo.sh >> /home/ubuntu/respaldo/mysqlDump/respaldo_continuo.log
