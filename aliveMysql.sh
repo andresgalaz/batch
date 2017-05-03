@@ -7,7 +7,7 @@ if [ $RUTA != "." ] ; then
 fi
 
 ERR=tmpFile.txt
-curl 'http://localhost:8080/wappCar/do/bsh/aliveMysql' --data 'prm_dataSource=snapcar' >> batch_aliveMysql.log 2>$ERR
+curl 'http://localhost:8080/wappCar/do/bsh/aliveMysql' --data 'prm_dataSource=scoreDS' >> batch_aliveMysql.log 2>$ERR
 (
 	echo 
 	cat $ERR

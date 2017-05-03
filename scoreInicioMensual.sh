@@ -27,7 +27,7 @@ else
 fi
 
 FECHA=$(date +'%Y-%m-%d')
-echo Inicio menusal $FECHA, WSAPI_AMBIENTE = $WSAPI_AMBIENTE
+echo Inicio mensual $FECHA, WSAPI_AMBIENTE = $WSAPI_AMBIENTE
 mysql  --user=snapcar --password=snapcar --database=$BASE_DATOS --table << EOF
 call prCalculaScoreMesInicio('$FECHA');
 call prCalculaScoreMesConductorInicio('$FECHA');
