@@ -23,7 +23,7 @@ echo
 echo '-----------------------------'
 echo '|  Migra procesos'
 echo '-----------------------------'
-cd /home/ubuntu/migraObservations
+cd /home/ubuntu/app_score/migraObservations
 node proceso.js
 #
 # Ya no hace falta correr este procesos dado que se ejecutan en proceso.js
