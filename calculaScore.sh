@@ -16,6 +16,11 @@ else
 	exit 1
 fi
 
+if ps -fe | grep -v grep | grep node | grep MIGRA_OBS ; then
+	echo "El proceso ya está corriendo"
+	exit 1
+fi
+
 echo '-----------------------------'
 echo "| WSAPI_AMBIENTE = $WSAPI_AMBIENTE"
 echo '-----------------------------'
@@ -24,17 +29,6 @@ echo '-----------------------------'
 echo '|  Migra procesos'
 echo '-----------------------------'
 cd /home/ubuntu/app_score/migraObservations
-node proceso.js
-#
-# Ya no hace falta correr este procesos dado que se ejecutan en proceso.js
-# usando el procedmiento prMigraEventos
-#
-# echo '-----------------------------'
-# echo '|  Calcula Puntaje Mes'
-# echo '-----------------------------'
-# FECHA=$(date +'%Y-%m-%d')
-# mysql  --user=snapcar --password=snapcar --database=$BASE_DATOS --table << EOF
-# call calculaScoreMes('$FECHA');
-# call calculaScoreMesConductor('$FECHA');
-# call calculaScoreMesViaje('$FECHA');
-# EOF
+# MIGRA_OBS se usa solo para identificarlo detrno de los procesos de UNIX
+# no tiene uso dentro del proceso.js
+node proceso.js MIGRA_OBS
