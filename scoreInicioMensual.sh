@@ -19,8 +19,13 @@ if [ ! "$WSAPI_AMBIENTE" ] ; then
 fi
 if [ "$WSAPI_AMBIENTE" = "DESA" ] ; then
 	BASE_DATOS=score_desa
+	PASSWORD=snapcar
+elif [ "$WSAPI_AMBIENTE" = "TEST" ] ; then
+	BASE_DATOS=score
+	PASSWORD=snapcar
 elif [ "$WSAPI_AMBIENTE" = "PROD" ] ; then
 	BASE_DATOS=score
+	PASSWORD=oycobe
 else
 	echo "Ambiente WSAPI_AMBIENTE=$WSAPI_AMBIENTE, desconocido"
 	exit 1
@@ -28,7 +33,7 @@ fi
 
 FECHA=$(date +'%Y-%m-%d')
 echo Inicio mensual $FECHA, WSAPI_AMBIENTE = $WSAPI_AMBIENTE
-mysql  --user=snapcar --password=oycobe --database=$BASE_DATOS --table << EOF
+mysql  --user=snapcar --password=$PASSWORD --database=$BASE_DATOS --table << EOF
 call prCalculaScoreMesInicio('$FECHA');
 call prCalculaScoreMesConductorInicio('$FECHA');
 EOF

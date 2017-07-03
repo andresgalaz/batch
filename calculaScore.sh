@@ -9,8 +9,12 @@ if [ ! "$WSAPI_AMBIENTE" ] ; then
 fi
 if [ "$WSAPI_AMBIENTE" = "DESA" ] ; then
 	BASE_DATOS=score_desa
+elif [ "$WSAPI_AMBIENTE" = "TEST" ] ; then
+	BASE_DATOS=score
+	DIR_PROCESO=/home/ubuntu/migraObservations
 elif [ "$WSAPI_AMBIENTE" = "PROD" ] ; then
 	BASE_DATOS=score
+	DIR_PROCESO=/home/ubuntu/app_score/migraObservations
 else
 	echo "Ambiente WSAPI_AMBIENTE=$WSAPI_AMBIENTE, desconocido"
 	exit 1
@@ -28,7 +32,7 @@ echo
 echo '-----------------------------'
 echo '|  Migra procesos'
 echo '-----------------------------'
-cd /home/ubuntu/app_score/migraObservations
-# MIGRA_OBS se usa solo para identificarlo detrno de los procesos de UNIX
+cd $DIR_PROCESO
+# MIGRA_OBS se usa solo para identificarlo dentro de los procesos de UNIX
 # no tiene uso dentro del proceso.js
 node proceso.js MIGRA_OBS
