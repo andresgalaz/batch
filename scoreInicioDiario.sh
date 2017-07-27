@@ -18,6 +18,8 @@ if [ ! "$WSAPI_AMBIENTE" ] ; then
 fi
 if [ "$WSAPI_AMBIENTE" = "DESA" ] ; then
 	BASE_DATOS=score_desa
+elif [ "$WSAPI_AMBIENTE" = "TEST" ] ; then
+	BASE_DATOS=score
 elif [ "$WSAPI_AMBIENTE" = "PROD" ] ; then
 	BASE_DATOS=score
 else
