@@ -12,9 +12,11 @@ if [ "$WSAPI_AMBIENTE" = "DESA" ] ; then
 elif [ "$WSAPI_AMBIENTE" = "TEST" ] ; then
 	BASE_DATOS=score
 	DIR_PROCESO=/home/ubuntu/migraObservations
+	PASSWORD=snapcar
 elif [ "$WSAPI_AMBIENTE" = "PROD" ] ; then
 	BASE_DATOS=score
 	DIR_PROCESO=/home/ubuntu/app_score/migraObservations
+	PASSWORD=oycobe
 else
 	echo "Ambiente WSAPI_AMBIENTE=$WSAPI_AMBIENTE, desconocido"
 	exit 1
@@ -36,3 +38,8 @@ cd $DIR_PROCESO
 # MIGRA_OBS se usa solo para identificarlo dentro de los procesos de UNIX
 # no tiene uso dentro del proceso.js
 node proceso.js MIGRA_OBS
+
+echo Migra Utlima Sincronización $FECHA,  WSAPI_AMBIENTE = $WSAPI_AMBIENTE
+mysql  --user=snapcar --password=$PASSWORD --database=$BASE_DATOS --table << EOF
+call prMigraUltimaSincro();
+EOF
