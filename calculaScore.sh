@@ -26,9 +26,18 @@ echo "| WSAPI_AMBIENTE = $WSAPI_AMBIENTE"
 echo '-----------------------------'
 echo
 echo '-----------------------------'
-echo '|  Migra procesos'
+echo '|  Migra procesos' $(date)
 echo '-----------------------------'
 cd /home/ubuntu/app_score/migraObservations
 # MIGRA_OBS se usa solo para identificarlo detrno de los procesos de UNIX
 # no tiene uso dentro del proceso.js
 node proceso.js MIGRA_OBS
+
+# Calcula fuerza G
+echo Inicio Calcula fuerza G $(date)
+mysql  --table -v -v -v  --user=snapcar --password=oycobe --database=$BASE_DATOS --table << EOF
+call prMigraValorG( DATE(NOW()) - INTERVAL 1 MONTH );
+EOF
+
+echo Fin proceso $(date)
+echo
