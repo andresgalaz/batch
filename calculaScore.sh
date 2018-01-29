@@ -40,7 +40,8 @@ cd $DIR_PROCESO
 node proceso.js MIGRA_OBS
 
 echo Migra Utlima Sincronización y Cálcula Fuerza G $(date),  WSAPI_AMBIENTE = $WSAPI_AMBIENTE
-mysql -v -v -v --user=snapcar --password=$PASSWORD --database=$BASE_DATOS --table << EOF_SQL
+# mysql -v -v -v --user=snapcar --password=$PASSWORD --database=$BASE_DATOS --table << EOF_SQL
+mysql --login-path=batchlocal -v -v -v --database=$BASE_DATOS --table << EOF_SQL
 call prMigraUltimaSincro();
 call prMigraValorG( DATE(NOW()) - INTERVAL 1 MONTH );
 EOF_SQL

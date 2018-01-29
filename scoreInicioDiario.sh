@@ -31,6 +31,7 @@ fi
 
 FECHA=$(date +'%Y-%m-%d')
 echo Inicio diario $FECHA,  WSAPI_AMBIENTE = $WSAPI_AMBIENTE
-mysql  --user=snapcar --password=$PASSWORD --database=$BASE_DATOS --table << EOF
+# mysql  --user=snapcar --password=$PASSWORD --database=$BASE_DATOS --table << EOF
+mysql  --login-path=batchlocal --database=$BASE_DATOS --table << EOF
 call prCalculaScoreDiaInicio('$FECHA');
 EOF
