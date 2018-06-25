@@ -11,11 +11,11 @@ if [ "$WSAPI_AMBIENTE" = "DESA" ] ; then
 	BASE_DATOS=score_desa
 elif [ "$WSAPI_AMBIENTE" = "TEST" ] ; then
 	BASE_DATOS=score
-	DIR_PROCESO=/home/ubuntu/migraObservations
+	DIR_PROCESO=/home/ubuntu/migraViajes
 	PASSWORD=snapcar
 elif [ "$WSAPI_AMBIENTE" = "PROD" ] ; then
 	BASE_DATOS=score
-	DIR_PROCESO=/home/ubuntu/app_score/migraObservations
+	DIR_PROCESO=/home/ubuntu/app_score/migraViajes
 	PASSWORD=oycobe
 else
 	echo "Ambiente WSAPI_AMBIENTE=$WSAPI_AMBIENTE, desconocido"
@@ -32,18 +32,16 @@ echo "| WSAPI_AMBIENTE = $WSAPI_AMBIENTE"
 echo '-----------------------------'
 echo
 echo '-----------------------------'
-echo '|  Migra procesos' $(date)
+echo '|  Migra viajes ' $(date)
 echo '-----------------------------'
-cd $DIR_PROCESO
 # MIGRA_OBS se usa solo para identificarlo dentro de los procesos de UNIX
 # no tiene uso dentro del proceso.js
-node proceso.js MIGRA_OBS
+$DIR_PROCESO/run.sh
 
-echo Migra Utlima Sincronización y Cálcula Fuerza G $(date),  WSAPI_AMBIENTE = $WSAPI_AMBIENTE
+echo Migra Utlima Sincronización $(date),  WSAPI_AMBIENTE = $WSAPI_AMBIENTE
 # mysql -v -v -v --user=snapcar --password=$PASSWORD --database=$BASE_DATOS --table << EOF_SQL
 mysql --login-path=batchlocal -v -v -v --database=$BASE_DATOS --table << EOF_SQL
 call prMigraUltimaSincro();
-call prMigraValorG( DATE(NOW()) - INTERVAL 1 MONTH );
 EOF_SQL
 
 echo Fin proceso $(date),  WSAPI_AMBIENTE = $WSAPI_AMBIENTE
