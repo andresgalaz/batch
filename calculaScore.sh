@@ -34,8 +34,6 @@ echo
 echo '-----------------------------'
 echo '|  Migra viajes ' $(date)
 echo '-----------------------------'
-# MIGRA_OBS se usa solo para identificarlo dentro de los procesos de UNIX
-# no tiene uso dentro del proceso.js
 $DIR_PROCESO/run.sh
 
 echo Migra Utlima Sincronización $(date),  WSAPI_AMBIENTE = $WSAPI_AMBIENTE
